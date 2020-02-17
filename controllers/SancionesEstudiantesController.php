@@ -70,6 +70,7 @@ class SancionesEstudiantesController extends Controller
 		
 		
 		$result = $command->queryAll();
+		$estudiantes = [];
 		
 		foreach ($result as $r)
 		{
