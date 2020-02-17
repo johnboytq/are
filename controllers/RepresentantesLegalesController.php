@@ -112,23 +112,45 @@ class RepresentantesLegalesController extends Controller
         //se consultan las personas que esten en la base de datos		
 		// $personas 	= Personas::find()->select( "id, ( nombres || ' ' || apellidos ) nombres" )->where( 'estado=1' )->all();
 		// $personas 		= ArrayHelper::map( $personas, 'id' , 'nombres' );
-		
+		$idSedes 		= $_SESSION['sede'][0];
 		/**
 		* Concexion a la db, llenar select de estudiantes
 		*/
-		//variable con la conexion a la base de datos  pe.id=11 es el perfil estudiante
+		//variable con la conexion a la base de datos 
 		$connection = Yii::$app->getDb();
 		
-		$command = $connection->createCommand("select pp.id as id, concat(p.nombres,' ',p.apellidos) as nombres
-												from personas as p, perfiles_x_personas as pp, perfiles as pe
-												where p.id= pp.id_personas
-												and p.estado=1
-												and pp.id_perfiles=pe.id
-												and pe.id=11
-												and pe.estado=1
-												");
+		//consulta de estudiantes con id de perfiles_x_personas  pe.id=11 es el perfil estudiante
+			$command = $connection->createCommand("			
+			SELECT
+				pp.id,
+				concat(p.nombres,' ',p.apellidos) as nombres
+			FROM 
+				personas as p, 
+				perfiles_x_personas as pp, 
+				estudiantes as e, 
+				perfiles as pe,
+				paralelos as pa,
+				sedes_niveles as sn
+			WHERE
+				pp.id_personas = p.id
+			AND
+				pp.id = e.id_perfiles_x_personas
+			AND
+				pe.id = 11
+			AND
+				e.id_paralelos = pa.id
+			AND 
+				pa.id_sedes_niveles = sn.id
+			AND 
+				sn.id_sedes = $idSedes
+			");
+				
+			
+				
 		$result = $command->queryAll();
 		//se formatea para que lo reconozca el select
+		
+		$estudiantes = [];
 		foreach($result as $key){
 			$estudiantes[$key['id']]=$key['nombres'];
 		}
