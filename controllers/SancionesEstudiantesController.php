@@ -91,16 +91,15 @@ class SancionesEstudiantesController extends Controller
 			AND 
 				pa.id_sedes_niveles = sn.id
 			AND 
-				sn.id_sedes = $idSedes
+				sn.id_sedes = '$idSedes'
 		");
 		
 		
 		$result = $command->queryAll();
 		$estudiantes = [];
-		
 		foreach ($result as $r)
 		{
-			$estudiantes[$r['id']] = $r['nombre'];
+			$estudiantes[$r['id']] = $r['nombres'];
 		}
 		return $estudiantes;
 	}
