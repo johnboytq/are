@@ -15,7 +15,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\RepresentantesLegales */
 
-$this->title = 'Actualizar';
+$this->title = 'Actualizar Estudiante';
 $this->params['breadcrumbs'][] = ['label' => 'Estudiantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Actualizar';
 ?>
