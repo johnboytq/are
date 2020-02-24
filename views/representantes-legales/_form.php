@@ -36,11 +36,11 @@ use nex\chosen\Chosen;
 /* @var $model app\models\RepresentantesLegales */
 /* @var $form yii\widgets\ActiveForm */
 
-$idEstudiante = key($estudiantes);
-$nombreEstudiante = $estudiantes[ $idEstudiante  ] ;
+$idEstudiante = @key($estudiantes);
+$nombreEstudiante = @$estudiantes[ $idEstudiante  ] ;
 
-$idRepresentante = key($representantesLegales);
-$nombreRepresentante  = $representantesLegales[ $idRepresentante  ] ;
+$idRepresentante = @key($representantesLegales);
+$nombreRepresentante  = @$representantesLegales[ $idRepresentante  ] ;
 
 // echo $nombreEstudiante;
 $this->registerJs( "
