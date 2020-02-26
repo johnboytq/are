@@ -60,7 +60,7 @@ class Docentes extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_perfiles_x_personas' => 'Perfiles por persona',
+            'id_perfiles_x_personas' => 'Docente',
             'id_escalafones' => 'Escalafones',
             'estado' => 'Estado',
             'Antiguedad' => 'Antigüedad',

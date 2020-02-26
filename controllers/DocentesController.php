@@ -103,17 +103,9 @@ class DocentesController extends Controller
 		* Concexion a la db, llenar select de docentes
 		*/
 		//variable con la conexion a la base de datos  pe.id=10 es el perfil docente
-		$connection = Yii::$app->getDb();
 		
-		$command = $connection->createCommand("select pp.id as id, concat(p.nombres,' ',p.apellidos) as nombres
-												from personas as p, perfiles_x_personas as pp, perfiles as pe
-												where p.id= pp.id_personas
-												and p.estado=1
-												and pp.id_perfiles=pe.id
-												and pe.id=10
-												and pe.estado=1
-												");
-		$result = $command->queryAll();
+		
+		$result = $this->docentes();
 		//se formatea para que lo reconozca el select
 		foreach($result as $key){
 			$personas[$key['id']]=$key['nombres'];
@@ -157,17 +149,7 @@ class DocentesController extends Controller
 		* Concexion a la db, llenar select de docentes
 		*/
 		//variable con la conexion a la base de datos  pe.id=10 es el perfil docente
-		$connection = Yii::$app->getDb();
-		
-		$command = $connection->createCommand("select pp.id as id, concat(p.nombres,' ',p.apellidos) as nombres
-												from personas as p, perfiles_x_personas as pp, perfiles as pe
-												where p.id= pp.id_personas
-												and p.estado=1
-												and pp.id_perfiles=pe.id
-												and pe.id=10
-												and pe.estado=1
-												");
-		$result = $command->queryAll();
+		$result = $this->docentes();
 		//se formatea para que lo reconozca el select
 		foreach($result as $key){
 			$personas[$key['id']]=$key['nombres'];
@@ -192,6 +174,24 @@ class DocentesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+	
+	//docentes con id de perfilesXpersonas
+	private function docentes()
+	{
+		$connection = Yii::$app->getDb();
+		$command = $connection->createCommand
+		("
+			select pp.id as id, concat(p.nombres,' ',p.apellidos,' - ', pp.id) as nombres
+			from personas as p, perfiles_x_personas as pp, perfiles as pe
+			where p.id= pp.id_personas
+			and p.estado=1
+			and pp.id_perfiles=pe.id
+			and pe.id=10
+			and pe.estado=1
+		");
+		$result = $command->queryAll();
+		return $result;
+	}		
     public function actionDelete($id)
     {
         // $this->findModel($id)->delete();

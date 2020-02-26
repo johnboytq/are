@@ -16,7 +16,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\RepresentantesLegales */
 
-$this->title = 'Agregar';
+$this->title = 'Agregar Estudiante';
 $this->params['breadcrumbs'][] = ['label' => 'Estudiantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-		'estudiantes'=>$estudiantes,
-		'representantesLegales'=>$representantesLegales,
+		// 'estudiantes'=>$estudiantes,
+		// 'representantesLegales'=>$representantesLegales,
 		// 'modelRepresentantesLegales'=> $modelRepresentantesLegales,
 		'estudianteSelected'=>0,
 		'representantesLegalesSelected'=>0,

@@ -100,14 +100,29 @@ $this->params['breadcrumbs'][] = $this->title;
 					//variable con la conexion a la base de datos 
 					// print_r($model); die;
 					$connection = Yii::$app->getDb();
-					$command = $connection->createCommand("SELECT pp.id, concat(p.nombres,' ',p.apellidos) as nombres
-															FROM public.perfiles_x_personas as pp, personas as p, representantes_legales as rl, estudiantes as e
-															WHERE p.id = pp.id_personas
-															AND rl.id_perfiles_x_personas = pp.id
-															AND e.id_perfiles_x_personas = pp.id
-															and p.estado = 1
-															and pp.estado = 1
-															AND pp.id =". $model->id_perfiles_x_personas."");
+					$command = $connection->createCommand("
+					SELECT
+						pp.id, 
+						concat(p.nombres,' ',p.apellidos) as nombres
+					FROM 
+						public.perfiles_x_personas as pp, 
+						personas as p, 
+						representantes_legales as rl, 
+						estudiantes as e
+					WHERE 
+						p.id = pp.id_personas
+					AND 
+						rl.id_perfiles_x_personas = pp.id
+					AND 
+						e.id_perfiles_x_personas = pp.id
+					AND 
+						p.estado = 1
+					AND 
+						pp.estado = 1
+					AND 
+						pp.id =". $model->id_perfiles_x_personas."");
+					
+					
 					$result = $command->queryAll();
 								
 					return $result[0]['nombres'];
@@ -129,7 +144,6 @@ $this->params['breadcrumbs'][] = $this->title;
 															AND rl.id_personas = p.id
 															and p.estado = 1
 															and pp.estado = 1
-
 															AND p.id  = $model->id_personas
 															group by p.id, p.nombres,p.apellidos");
 					$result = $command->queryAll();
