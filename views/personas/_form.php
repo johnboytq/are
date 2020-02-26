@@ -188,7 +188,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/personas.js',['depends' =
   </div>
   <div class="tab-pane fade" id="perfiles" role="tabpanel" aria-labelledby="perfiles-tab">
 	<br>
-	<?= $form->field($perfilesTable, 'id')->dropDownList($perfiles, ['multiple'=>'multiple','size'=>'10'])->label($descripcion) ?>
+	<?= $form->field($perfilesTable, 'id')->dropDownList($perfiles, ['multiple'=>'multiple','size'=>'10','required'=>true])->label($descripcion) ?>
   </div>
   
   <div class="tab-pane fade" id="hobbies" role="tabpanel" aria-labelledby="hobbies-tab">
