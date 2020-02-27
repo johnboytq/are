@@ -23,6 +23,10 @@ use Yii;
  * @property string $id
  * @property string $id_niveles
  * @property string $id_sedes
+ * @property string $id_sedes_jornadas 
+ * @property string $capacidad 
+ * @property string $grupos 
+ * @property string $numero_matriculados 
  *
  * @property AsignaturasXNivelesSedes[] $asignaturasXNivelesSedes
  * @property Paralelos[] $paralelos
@@ -45,8 +49,8 @@ class SedesNiveles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_niveles', 'id_sedes'], 'default', 'value' => null],
-            [['id_niveles', 'id_sedes'], 'integer'],
+            [['id_niveles', 'id_sedes', 'id_sedes_jornadas', 'capacidad', 'grupos', 'numero_matriculados'], 'default', 'value' => null],
+            [['id_niveles', 'id_sedes', 'id_sedes_jornadas', 'capacidad', 'grupos', 'numero_matriculados'], 'integer'],
             [['id_niveles'], 'exist', 'skipOnError' => true, 'targetClass' => Niveles::className(), 'targetAttribute' => ['id_niveles' => 'id']],
             [['id_sedes'], 'exist', 'skipOnError' => true, 'targetClass' => Sedes::className(), 'targetAttribute' => ['id_sedes' => 'id']],
             [['id_sedes'], 'required' ],
@@ -63,6 +67,10 @@ class SedesNiveles extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_niveles' => 'Niveles',
             'id_sedes' => 'Sedes',
+			'id_sedes_jornadas' => 'Id Sedes Jornadas',
+			'capacidad' => 'Capacidad',
+			'grupos' => 'Grupos',
+			'numero_matriculados' => 'Numero Matriculados',
         ];
     }
 

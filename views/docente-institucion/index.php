@@ -39,54 +39,56 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($nombreInstitucion) ?></h1>
 
-
-   <?= DataTables::widget([
-        'dataProvider' => $dataProvider,
-		'clientOptions' => [
-		'language'=>[
-                'url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
-            ],
-		"lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],
-		"info"=>false,
-		"responsive"=>true,
-		 "dom"=> 'lfTrtip',
-		 "tableTools"=>[
-			 "aButtons"=> [  
-				// [
-				// "sExtends"=> "copy",
-				// "sButtonText"=> Yii::t('app',"Copiar")
-				// ],
-				// [
-				// "sExtends"=> "csv",
-				// "sButtonText"=> Yii::t('app',"CSV")
-				// ],
-				[
-				"sExtends"=> "xls",
-				"oSelectorOpts"=> ["page"=> 'current']
-				],
-				[
-				"sExtends"=> "pdf",
-				"oSelectorOpts"=> ["page"=> 'current']
-				],
-				// [
-				// "sExtends"=> "print",
-				// "sButtonText"=> Yii::t('app',"Imprimir")
-				// ],
+	<?php $dataProvider->getCount() < 1 ? '<h1>NO HAY REGISTROS PARA MOSTRAR</h1>' : '' ?>
+	
+	   <?= DataTables::widget([
+			'dataProvider' => $dataProvider,
+			'clientOptions' => [
+				'language'=>[
+						'url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
+						"sEmptyTable" => "No hay información",
+					],
+				"lengthMenu"=> [[20,-1], [20,Yii::t('app',"All")]],
+				"info"=>false,
+				"responsive"=>true,
+				 "dom"=> 'lfTrtip',
+				 "tableTools"=>[
+					 "aButtons"=> [  
+						// [
+						// "sExtends"=> "copy",
+						// "sButtonText"=> Yii::t('app',"Copiar")
+						// ],
+						// [
+						// "sExtends"=> "csv",
+						// "sButtonText"=> Yii::t('app',"CSV")
+						// ],
+						[
+						"sExtends"=> "xls",
+						"oSelectorOpts"=> ["page"=> 'current']
+						],
+						[
+						"sExtends"=> "pdf",
+						"oSelectorOpts"=> ["page"=> 'current']
+						],
+						// [
+						// "sExtends"=> "print",
+						// "sButtonText"=> Yii::t('app',"Imprimir")
+						// ],
+					],
+				 ],
 			],
-		 ],
-	],
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+			'columns' => [
+				['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
-            'identificacion',
-            'nombres',
-            'apellidos',
-            'asignatura',
-            'sede',
-            
+				// 'id',
+				'identificacion',
+				'nombres',
+				'apellidos',
+				'asignatura',
+				'sede',
+				
 
-            // ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+				// ['class' => 'yii\grid\ActionColumn'],
+			],
+		]); ?>
 </div>

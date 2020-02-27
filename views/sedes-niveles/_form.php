@@ -25,6 +25,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id_niveles')->dropDownList( $niveles, [ 'prompt' => 'Seleccione...' ]) ?>
 
     <?= $form->field($model, 'id_sedes')->dropDownList( $sedes ) ?>
+    
+	<?= $form->field($model, 'id_sedes_jornadas')->dropDownList( $jornadas, [ 'prompt' => 'Seleccione...' ] ) ?>
+	
+	<?= $form->field($model, 'capacidad')->textInput() ?>
+	
+	<?= $form->field($model, 'grupos')->textInput() ?>
+	
+	<?= $form->field($model, 'numero_matriculados')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

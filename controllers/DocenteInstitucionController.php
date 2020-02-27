@@ -89,6 +89,8 @@ class DocenteInstitucionController extends Controller
 					 AND ans.id_asignaturas = asig.id
 					 AND sn.id = ans.id_sedes_niveles
 					 AND s.id = sn.id_sedes
+					 AND ppi.estado = 1
+			    GROUP BY 1,2,3,4,5
 					 ";
 		
 		   $dataProvider = new SqlDataProvider([

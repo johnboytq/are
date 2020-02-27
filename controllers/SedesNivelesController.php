@@ -30,6 +30,8 @@ use yii\filters\VerbFilter;
 use app\models\Sedes;
 use app\models\Instituciones;
 use app\models\Niveles;
+use app\models\Jornadas;
+use app\models\SedesJornadas;
 use yii\helpers\ArrayHelper;
 
 
@@ -129,6 +131,18 @@ class SedesNivelesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+		
+		$jornadasData	= SedesJornadas::find()
+								->alias('sj')
+								->select([ 'sj.id', 'sj.id_jornadas'])
+								->innerJoin( "jornadas j", "j.id=sj.id_jornadas" )
+								->andWhere( 'sj.id_sedes='.$idSedes )
+								->andWhere( 'j.estado=1' )
+								->all();
+						
+		$jornadas		= ArrayHelper::map( $jornadasData, 'id', function( $value ){ 
+											return Jornadas::findOne( $value['id_jornadas'] )->descripcion; 
+										});
 
         return $this->render('create', [
             'model' 			=> $model,
@@ -136,6 +150,7 @@ class SedesNivelesController extends Controller
             'modelInstitucion' 	=> $modelInstitucion,
             'sedes' 			=> $sedes,
             'niveles' 			=> $niveles,
+            'jornadas' 			=> $jornadas,
         ]);
     }
 
@@ -156,12 +171,24 @@ class SedesNivelesController extends Controller
 		$dataSedes	  = Sedes::find()->where( 'id='.$modelSedes->id )->all();
 		$sedes		  = ArrayHelper::map( $dataSedes, 'id', 'descripcion' );
 		
-		$dataNiveles  = Niveles::find()->where( 'estado=1' )->all();
+		$dataNiveles  = Niveles::find()->where( 'estado=1' )->andWhere('id='.$model->id_niveles)->all();
 		$niveles	  = ArrayHelper::map( $dataNiveles, 'id', 'descripcion' );
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+		
+		$jornadasData	= SedesJornadas::find()
+								->alias('sj')
+								->select([ 'sj.id', 'sj.id_jornadas'])
+								->innerJoin( "jornadas j", "j.id=sj.id_jornadas" )
+								->andWhere( 'sj.id_sedes='.$model->id_sedes )
+								->andWhere( 'j.estado=1' )
+								->all();
+						
+		$jornadas		= ArrayHelper::map( $jornadasData, 'id', function( $value ){ 
+											return Jornadas::findOne( $value['id_jornadas'] )->descripcion; 
+										});
 
         return $this->render('update', [
             'model' 			=> $model,
@@ -169,6 +196,7 @@ class SedesNivelesController extends Controller
             'modelInstitucion' 	=> $modelInstitucion,
             'sedes' 			=> $sedes,
             'niveles' 			=> $niveles,
+            'jornadas' 			=> $jornadas,
         ]);
     }
 

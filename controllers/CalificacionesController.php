@@ -708,6 +708,7 @@ class CalificacionesController extends Controller
     public function actionListarI($idDocente, $idParalelo, $idAsignatura)
     {
 
+		$resultado = [];
 
         //variable con la conexion a la base de datos
         $connection = Yii::$app->getDb();

@@ -158,7 +158,8 @@ $estudiantes = Personas::find()
 					->andWhere( "pp.estado=1" )
 					->andWhere( "personas.estado=1" )
 					->andWhere( "e.estado=1" )
-					->andWhere( "p.descripcion='".$aulas->descripcion."'" )
+					// ->andWhere( "p.descripcion='".$aulas->descripcion."'" )
+					->andWhere( "p.id='".$distribucionAcademica->id_paralelo_sede."'" )
 					->all();
 		
 $data = [];		

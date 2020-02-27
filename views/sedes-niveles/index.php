@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
 
 use app\models\Sedes;
 use app\models\Niveles;
+use app\models\Jornadas;
 use fedemotta\datatables\DataTables;
 
 /* @var $this yii\web\View */
@@ -93,6 +94,23 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'filter' => ArrayHelper::map(Niveles::find()->all(), 'id', 'descripcion' ),
 			],
+			[
+				'attribute' => 'id_sedes_jornadas',
+				'value' 	=> function( $model ){
+					$jornadas = Jornadas::find()
+									->alias('j')
+									->innerJoin( 'sedes_jornadas sj', 'sj.id_jornadas=j.id')
+									->where( 'sj.id='.$model->id_sedes_jornadas )
+									->andWhere( 'j.estado=1' )
+									->one();
+									
+					return $jornadas ? $jornadas->descripcion : '';
+				},
+				'filter' => ArrayHelper::map(Niveles::find()->all(), 'id', 'descripcion' ),
+			],
+			'capacidad',
+			'grupos',
+			'numero_matriculados',
 			// [
 				// 'attribute' => 'id_sedes',
 				// 'value' 	=> function( $model ){

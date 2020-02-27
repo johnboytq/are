@@ -13,18 +13,18 @@ use app\models\Paralelos;
 class ParalelosBuscar extends Paralelos
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'estado'], 'integer'],
-            [['descripcion', 'ano_lectivo', 'fecha_ingreso'], 'safe'],
+            [['id', 'id_sedes_jornadas', 'id_sedes_niveles', 'ano_lectivo', 'estado', 'capacidad', 'numero_matriculados'], 'integer'],
+            [['descripcion', 'fecha_ingreso'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -62,12 +62,14 @@ class ParalelosBuscar extends Paralelos
             'id' => $this->id,
             'id_sedes_jornadas' => $this->id_sedes_jornadas,
             'id_sedes_niveles' => $this->id_sedes_niveles,
+            'ano_lectivo' => $this->ano_lectivo,
             'fecha_ingreso' => $this->fecha_ingreso,
             'estado' => $this->estado,
+            'capacidad' => $this->capacidad,
+            'numero_matriculados' => $this->numero_matriculados,
         ]);
 
-        $query->andFilterWhere(['ilike', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['ilike', 'ano_lectivo', $this->ano_lectivo]);
+        $query->andFilterWhere(['ilike', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }

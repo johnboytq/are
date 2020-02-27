@@ -89,7 +89,7 @@ if( $idSedes > 0 ){
 	//Obterniendo los datos necesarios para Sedes						
 	$personasTable	 		= new Personas();
 	$queryPersonas 			= $personasTable->find()
-									->select( "personas.id, ( nombres || apellidos ) as nombres" )
+									->select( "personas.id, ( nombres || ' ' || apellidos ) as nombres" )
 									->innerJoin( "perfiles_x_personas pp", "pp.id_personas=personas.id" )
 									->innerJoin( "distribuciones_academicas da", "da.id_perfiles_x_personas_docentes=pp.id" )
 									->innerJoin( "aulas_x_paralelos ap", "ap.id_paralelos=da.id_paralelo_sede" )
@@ -145,8 +145,10 @@ if( $idGrupo > 0 ){
 								->innerJoin( "distribuciones_academicas da", "da.id_asignaturas_x_niveles_sedes=ans.id" )
 								->innerJoin( "aulas_x_paralelos ap", "ap.id_paralelos=da.id_paralelo_sede" )
 								->innerJoin( "aulas a", "a.id=ap.id_aulas" )
+								->innerJoin( "perfiles_x_personas pp", "pp.id=da.id_perfiles_x_personas_docentes" )
+								->innerJoin( "personas p", "p.id=pp.id_personas" )
 								->where('da.estado=1')
-								->andWhere( "da.id_perfiles_x_personas_docentes=".$idDocente )
+								->andWhere( "p.id=".$idDocente )
 								->andWhere( "a.id=".$idGrupo )
 								->orderby('descripcion');
 	// $queryPersonas->andWhere( 'id_instituciones='.$idInstitucion );
