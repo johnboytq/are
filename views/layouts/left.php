@@ -147,6 +147,7 @@
 												['label' => 'Grupos por nivel','icon' => 'circle-o','url' => ['paralelos/index'],],
 												['label' => 'Distribución académica', 'icon' => '', 'url' => ['distribuciones-academicas/index'],],
 												['label' => 'Asignatura niveles', 'icon' => '', 'url' => ['asignaturas-niveles-sedes/index'],],
+												['label' => 'Aulas por grupo', 'icon' => '', 'url' => ['aulas-x-paralelos/index'],],
 										        ['label' => 'Director de grupo', 'icon' => '', 'url' => ['director-paralelo/index'],],
 										        ['label' => 'Carga Masiva', 'icon' => '', 'url' => ['poblar-tabla/index'],],
 												// ['label' => 'Docente de grupo', 'icon' => '', 'url' => '#',], //esta en la distribucion academica
