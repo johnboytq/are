@@ -33,8 +33,8 @@ class RepresentantesLegales extends \yii\db\ActiveRecord
             [['id_perfiles_x_personas', 'id_personas'], 'default', 'value' => null],
             [['id_perfiles_x_personas', 'id_personas'], 'integer'],
             [['id_perfiles_x_personas', 'id_personas'], 'required'],
-            [['id_perfiles_x_personas'], 'exist', 'skipOnError' => true, 'targetClass' => PerfilesXPersonas::className(), 'targetAttribute' => ['id_perfiles_x_personas' => 'id']],
-            [['id_personas'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['id_personas' => 'id']],
+            // [['id_perfiles_x_personas'], 'exist', 'skipOnError' => true, 'targetClass' => PerfilesXPersonas::className(), 'targetAttribute' => ['id_perfiles_x_personas' => 'id']],
+            // [['id_personas'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['id_personas' => 'id']],
         ];
     }
 

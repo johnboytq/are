@@ -57,23 +57,49 @@ class SancionesEstudiantesController extends Controller
 	{
 		
 		$idInstitucion = $_SESSION['instituciones'][0];
+		$idSedes 		= $_SESSION['sede'][0];
 		$connection = Yii::$app->getDb();
 		//saber el id de la sede para redicionar al index correctamente
+		// $command = $connection->createCommand("
+			// select pp.id,concat(p.nombres,' ',p.apellidos) as nombre
+			// from personas as p, perfiles_x_personas as pp, perfiles_x_personas_institucion as ppi
+			// where pp.id_personas  = p.id
+			// and pp.id = ppi.id_perfiles_x_persona
+			// and ppi.id_institucion = $idInstitucion
+			// and pp.id_perfiles = 11
+		// ");
+		
 		$command = $connection->createCommand("
-			select pp.id,concat(p.nombres,' ',p.apellidos) as nombre
-			from personas as p, perfiles_x_personas as pp, perfiles_x_personas_institucion as ppi
-			where pp.id_personas  = p.id
-			and pp.id = ppi.id_perfiles_x_persona
-			and ppi.id_institucion = $idInstitucion
-			and pp.id_perfiles = 11
+			SELECT
+				pp.id,
+				concat(p.nombres,' ',p.apellidos) as nombres
+			FROM 
+				personas as p, 
+				perfiles_x_personas as pp, 
+				estudiantes as e, 
+				perfiles as pe,
+				paralelos as pa,
+				sedes_niveles as sn
+			WHERE
+				pp.id_personas = p.id
+			AND
+				pp.id = e.id_perfiles_x_personas
+			AND
+				pe.id = 11
+			AND
+				e.id_paralelos = pa.id
+			AND 
+				pa.id_sedes_niveles = sn.id
+			AND 
+				sn.id_sedes = '$idSedes'
 		");
 		
 		
 		$result = $command->queryAll();
-		
+		$estudiantes = [];
 		foreach ($result as $r)
 		{
-			$estudiantes[$r['id']] = $r['nombre'];
+			$estudiantes[$r['id']] = $r['nombres'];
 		}
 		return $estudiantes;
 	}

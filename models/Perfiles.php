@@ -33,7 +33,7 @@ class Perfiles extends \yii\db\ActiveRecord
     {
         return [
             [['descripcion'], 'string'],
-            [['descripcion'], 'required'],
+            [['descripcion','id'], 'required'],
             [['jerarquia', 'estado'], 'default', 'value' => null],
             [['jerarquia', 'estado'], 'integer'],
             [['estado'], 'exist', 'skipOnError' => true, 'targetClass' => Estados::className(), 'targetAttribute' => ['estado' => 'id']],
@@ -46,7 +46,7 @@ class Perfiles extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Perfil',
             'descripcion' => 'Perfil',
             'jerarquia' => 'Jerarquia',
             'estado' => 'Estado',
