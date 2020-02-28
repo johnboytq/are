@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'attribute'=>'id_perfiles_x_personas_docentes',
 				'value' => function( $model )
 				{
-					$id = PerfilesXPersonas::findOne($model->id_perfiles_x_personas_docentes);
+					$id = PerfilesXPersonas::findOne($model->id_perfiles_x_personas_docentes)->id_personas;
 					$personas = Personas::findOne($id);
 					return $personas ? $personas->nombres." ".$personas->apellidos : '';
 				}, 

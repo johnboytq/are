@@ -25,7 +25,7 @@ $nombreSede = $nombreSede[$idSedes];
 
 $this->title = 'Agregar director de grupo';
 $this->params['breadcrumbs'][] = [
-								'label' => 'Asignaturas', 
+								'label' => 'Director de grupo', 
 								'url' => [
 											'index',
 											'idInstitucion' => $idInstitucion, 
