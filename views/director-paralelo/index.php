@@ -29,7 +29,7 @@ use yii\grid\GridView;
 
 
 use fedemotta\datatables\DataTables;
-use app\models\personas;
+use app\models\Personas;
 use app\models\PerfilesXPersonas;
 use app\models\Paralelos;
 /* @var $this yii\web\View */
