@@ -29,7 +29,7 @@ use yii\grid\GridView;
 
 
 use fedemotta\datatables\DataTables;
-use app\models\personas;
+use app\models\Personas;
 use app\models\PerfilesXPersonas;
 use app\models\Paralelos;
 /* @var $this yii\web\View */
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'attribute'=>'id_perfiles_x_personas_docentes',
 				'value' => function( $model )
 				{
-					$id = PerfilesXPersonas::findOne($model->id_perfiles_x_personas_docentes);
+					$id = PerfilesXPersonas::findOne($model->id_perfiles_x_personas_docentes)->id_personas;
 					$personas = Personas::findOne($id);
 					return $personas ? $personas->nombres." ".$personas->apellidos : '';
 				}, 

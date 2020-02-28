@@ -546,6 +546,10 @@ $this->params['breadcrumbs'][] =
 					
 					<?php
 					
+					if( empty( $dataProvider ) ) ?>
+						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
+					<?php
+					
 					foreach( $dataProvider as $dP )
 					{
 						//Si el grupo no tiene registro no se muestra
@@ -598,7 +602,9 @@ $this->params['breadcrumbs'][] =
 										'attribute' => 'grupo',
 										'label'		=> 'Grado',
 										'value'		=> function( $model ){
-											list( $grado, $grupo ) = explode( "-", $model[ 'grupo' ] );
+											$exp = explode( "-", $model[ 'grupo' ] );
+											$grado = $exp[0];
+											$grupo = !empty( $exp[1] ) ? $exp[1] : '';
 											return $grado;
 										},
 									],
@@ -606,7 +612,9 @@ $this->params['breadcrumbs'][] =
 										'attribute' => 'grupo',
 										'label'		=> 'Grupo',
 										'value'		=> function( $model ){
-											list( $grado, $grupo ) = explode( "-", $model[ 'grupo' ] );
+											$exp 	= explode( "-", $model[ 'grupo' ] );
+											$grado	= $exp[0];
+											$grupo 	= !empty( $exp[1] ) ? $exp[1] : '';
 											return $grupo;
 										},
 									],
@@ -732,6 +740,12 @@ $this->params['breadcrumbs'][] =
 				?>
 					 
 					<h2><?= Html::encode( "Listado de estudiantes por Grado - Desempeño (Puesto Ocupado)" ) ?></h2><br>
+					
+					<?php
+					
+					if( empty( $dataProvider ) ) ?>
+						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
+					
 					
 					<?php
 					
