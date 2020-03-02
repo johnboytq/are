@@ -46,11 +46,14 @@ $this->params['breadcrumbs'][] = $this->title;
 					$connection = Yii::$app->getDb();
 					//saber el id de la sede para redicionar al index correctamente
 					$command = $connection->createCommand("
-					select concat(p.nombres,' ',p.apellidos) as nombre
-					from personas as p, perfiles_x_personas as pp, perfiles_x_personas_institucion as ppi
-					where pp.id_personas  = p.id
-					and pp.id = ppi.id_perfiles_x_persona
-					and ppi.id_perfiles_x_persona = $id
+					SELECT 
+						concat(p.nombres,' ',p.apellidos) as nombre
+					FROM 
+						personas as p, perfiles_x_personas as pp
+					WHERE 
+						pp.id_personas  = p.id
+					AND 
+						pp.id = $id
 					");
 					$result = $command->queryAll();
 					return $result[0]['nombre'];
