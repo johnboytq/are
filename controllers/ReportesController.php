@@ -493,7 +493,7 @@ class ReportesController extends Controller
 					
 					$dataProvider = [];
 					
-					$sql ="SELECT p.id
+					$sql ="SELECT p.id, n.descripcion as nivel
 							 FROM public.sedes_jornadas as sj, 
 								  public.jornadas as j, 
 								  public.sedes as s,
@@ -517,7 +517,7 @@ class ReportesController extends Controller
 				
 					foreach( $result as $key => $value )
 					{
-						$sql ="SELECT p.identificacion, concat(p.nombres,' ',p.apellidos) as nombre, p.domicilio, pa.descripcion as grupo, SUM(c.calificacion) as puesto
+						$sql ="SELECT p.identificacion, concat(p.nombres,' ',p.apellidos) as nombre, p.domicilio, pa.descripcion as grupo, SUM(c.calificacion) as puesto, '".$value['nivel']."' as nivel
 								 FROM personas as p, 
 									  perfiles_x_personas as pp 
 							LEFT JOIN calificaciones as c

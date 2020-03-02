@@ -544,11 +544,10 @@ $this->params['breadcrumbs'][] =
 					 
 					<h2><?= Html::encode( "Listado de estudiantes por Grupo - Desempeño (Puesto Ocupado)" ) ?></h2><br>
 					
-					<?php
-					
-					if( empty( $dataProvider ) ) ?>
+					<?php if( count( $dataProvider ) == 0 ){ ?>
 						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
-					<?php
+					<?php 
+					}
 					
 					foreach( $dataProvider as $dP )
 					{
@@ -602,20 +601,14 @@ $this->params['breadcrumbs'][] =
 										'attribute' => 'grupo',
 										'label'		=> 'Grado',
 										'value'		=> function( $model ){
-											$exp = explode( "-", $model[ 'grupo' ] );
-											$grado = $exp[0];
-											$grupo = !empty( $exp[1] ) ? $exp[1] : '';
-											return $grado;
+											return $model[ 'nivel' ];
 										},
 									],
 									[
 										'attribute' => 'grupo',
 										'label'		=> 'Grupo',
 										'value'		=> function( $model ){
-											$exp 	= explode( "-", $model[ 'grupo' ] );
-											$grado	= $exp[0];
-											$grupo 	= !empty( $exp[1] ) ? $exp[1] : '';
-											return $grupo;
+											return $model[ 'grupo' ];
 										},
 									],
 									// [
@@ -741,13 +734,10 @@ $this->params['breadcrumbs'][] =
 					 
 					<h2><?= Html::encode( "Listado de estudiantes por Grado - Desempeño (Puesto Ocupado)" ) ?></h2><br>
 					
-					<?php
-					
-					if( empty( $dataProvider ) ) ?>
+					<?php if( count( $dataProvider ) == 0  ){ ?>
 						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
-					
-					
 					<?php
+					}
 					
 					foreach( $dataProvider as $dP )
 					{
