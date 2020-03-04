@@ -166,6 +166,8 @@ if( $idSedes > 0 ){
 	$dataPeriodos 		= $periodosTable->find()
 								->where('estado=1')
 								->andWhere( "id_sedes=".$idSedes )
+								->andWhere( [ 'not', [ 'fecha_inicio' => null ] ] )
+								->andWhere( [ 'not', [ 'fecha_fin' => null ] ] )
 								->orderby('descripcion');
 	// $queryPeriodos->andWhere( 'id_instituciones='.$idInstitucion );
 	$dataPeriodos	 	= $dataPeriodos->all();
