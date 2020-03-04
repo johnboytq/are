@@ -111,6 +111,8 @@ class DistribucionesAcademicasController extends Controller
 		$idInstitucion = $_SESSION['instituciones'][0];
 		$idSedes = $_SESSION['sede'][0];
 		
+		$aulas = [];
+		
 		//se usa en el form para que en el yii se activen los dataTables
 		$sql ="
 		SELECT p.identificacion
