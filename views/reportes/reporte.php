@@ -544,16 +544,15 @@ $this->params['breadcrumbs'][] =
 					 
 					<h2><?= Html::encode( "Listado de estudiantes por Grupo - Desempeño (Puesto Ocupado)" ) ?></h2><br>
 					
-					<?php if( count( $dataProvider ) == 0 ){ ?>
-						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
 					<?php 
-					}
 					
+					$muestra_datos = false;
 					foreach( $dataProvider as $dP )
 					{
 						//Si el grupo no tiene registro no se muestra
 						if( $dP->getTotalCount() > 0 )
 						{
+							$muestra_datos = true;
 						
 							echo  DataTables::widget([
 								'dataProvider' => $dP,
@@ -622,6 +621,11 @@ $this->params['breadcrumbs'][] =
 							echo "<br>";
 							echo "<br>";
 						}
+					}
+					
+					if( !$muestra_datos  ){ ?>
+						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
+					<?php
 					}
 					
 				break;
@@ -734,16 +738,15 @@ $this->params['breadcrumbs'][] =
 					 
 					<h2><?= Html::encode( "Listado de estudiantes por Grado - Desempeño (Puesto Ocupado)" ) ?></h2><br>
 					
-					<?php if( count( $dataProvider ) == 0  ){ ?>
-						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
-					<?php
-					}
-					
+					<?php 
+					$muestra_datos = false;
 					foreach( $dataProvider as $dP )
 					{
 						//Si el grupo no tiene registro no se muestra
 						if( $dP->getTotalCount() > 0 )
 						{
+							
+							$muestra_datos = true;
 						
 							echo  DataTables::widget([
 								'dataProvider' => $dP,
@@ -805,6 +808,11 @@ $this->params['breadcrumbs'][] =
 							echo "<br>";
 							echo "<br>";
 						}
+					}
+					
+					if( !$muestra_datos  ){ ?>
+						<h2><?= Html::encode( "NO SE ENCUENTRAN DATOS PARA MOSTRAR" ) ?></h2><br>
+					<?php
 					}
 					
 				break;
