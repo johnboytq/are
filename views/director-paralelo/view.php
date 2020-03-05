@@ -32,7 +32,7 @@ miga de pan
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-use app\models\personas;
+use app\models\Personas;
 use app\models\PerfilesXPersonas;
 use app\models\Paralelos;
 use app\models\Sedes;
