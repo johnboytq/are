@@ -186,7 +186,7 @@ class RepresentantesLegalesController extends Controller
 	
 	
 	//retorna los represetantes legales segun filtro
-	public function actionRepresentante($filtro)
+	public function actionRepresentante(int $filtro)
 	{
 		$connection = Yii::$app->getDb();
 		
