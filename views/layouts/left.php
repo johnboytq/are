@@ -224,7 +224,7 @@
 							 'items' => [
                                             ['label' => 'Estudiantes', 'icon' => 'circle-o', 'url' => ['representantes-legales/index'],],
 											['label' => 'Horario', 'icon' => 'circle-o', 'url' => ['horario-estudiante/index'],],
-											//['label' => 'Hoja de vida', 'icon' => 'circle-o', 'url' => ['hoja-vida-estudiante/index'],],
+											['label' => 'Hoja de vida', 'icon' => 'circle-o', 'url' => ['hoja-vida-estudiante/index'],],
                                         ],
 							
 							],
