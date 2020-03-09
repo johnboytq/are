@@ -88,26 +88,30 @@ $this->registerJs( "
 				{
 					var info ='';
 					filtro = $(this).children('div').children().children().val();
-					$.get( 'index.php?r=representantes-legales/personas&filtro='+filtro,
-					function( data )
+					if (filtro.length > 3)
 					{
-						$.each(data, function( index, datos) 
-							{	
-								info = info + '<option value='+datos.id+'>'+datos.nombres+'</option>';
+					
+						$.get( 'index.php?r=representantes-legales/personas&filtro='+filtro,
+						function( data )
+						{
+							$.each(data, function( index, datos) 
+								{	
+									info = info + '<option value='+datos.id+'>'+datos.nombres+'</option>';
+									
+								});
 								
-							});
+							select = $('#representanteslegales-id_perfiles_x_personas');	
+							select.html('');
+							select.trigger('chosen:updated');
 							
-						select = $('#representanteslegales-id_perfiles_x_personas');	
-						select.html('');
-						select.trigger('chosen:updated');
-						
-						select.append(info);
-						select.trigger('chosen:updated');
-						
-						
-					},'json'
-						);
-						
+							select.append(info);
+							select.trigger('chosen:updated');
+							
+							
+						},'json'
+							);
+					
+					}
 				}
 		});
 		
@@ -119,25 +123,29 @@ $this->registerJs( "
 				{
 					var info ='';
 					filtro = $(this).children('div').children().children().val();
-					$.get( 'index.php?r=representantes-legales/representante&filtro='+filtro,
-					function( data )
+					if (filtro.length > 3)
 					{
-						$.each(data, function( index, datos) 
-							{	console.log(datos.identificacion);
-								info = info + '<option value='+datos.id+'>'+datos.nombres+'</option>';
+						$.get( 'index.php?r=representantes-legales/representante&filtro='+filtro,
+						function( data )
+						{
+							$.each(data, function( index, datos) 
+								{	console.log(datos.identificacion);
+									info = info + '<option value='+datos.id+'>'+datos.nombres+'</option>';
+									
+								});
 								
-							});
+							select = $('#representanteslegales-id_personas');	
+							select.html('');
+							select.trigger('chosen:updated');
 							
-						select = $('#representanteslegales-id_personas');	
-						select.html('');
-						select.trigger('chosen:updated');
+							select.append(info);
+							select.trigger('chosen:updated');
+							
+							
+						},'json'
+							);
 						
-						select.append(info);
-						select.trigger('chosen:updated');
-						
-						
-					},'json'
-						);
+					}
 						
 				}
 		});
