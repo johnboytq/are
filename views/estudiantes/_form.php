@@ -30,13 +30,55 @@ Cambios realizados: - correccion de error cuando la sede no tiene niveles
 **********/
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use app\models\SedesNiveles;
+use nex\chosen\Chosen;
 /* @var $this yii\web\View */
 /* @var $model app\models\Estudiantes */
 /* @var $form yii\widgets\ActiveForm */
-use app\models\SedesNiveles;
-$this->registerJsFile(Yii::$app->request->baseUrl.'/js/matriculasEstudiantes.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 
+$this->registerJsFile(Yii::$app->request->baseUrl.'/js/matriculasEstudiantes.js',['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJs( "
+
+	$( document ).ready(function() 
+	{	
+		
+		//representantes_legales
+		$('#estudiantes_id_perfiles_x_personas_chosen').on( 'keydown', function(event) {
+				if(event.which == 13)
+				{
+					var info ='';
+					filtro = $(this).children('div').children().children().val();
+					if (filtro.length > 3)
+					{
+						$.get( 'index.php?r=estudiantes/estudiantes&filtro='+filtro,
+						function( data )
+						{
+							$.each(data, function( index, datos) 
+								{	console.log(datos.identificacion);
+									info = info + '<option value='+datos.id+'>'+datos.nombres+'</option>';
+									
+								});
+								
+							select = $('#estudiantes-id_perfiles_x_personas');	
+							select.html('');
+							select.trigger('chosen:updated');
+							
+							select.append(info);
+							select.trigger('chosen:updated');
+							
+							
+						},'json'
+							);
+						
+					}
+						
+				}
+		});
+
+		
+	});
+		
+");
 ?>
 
 
@@ -91,8 +133,19 @@ $this->registerJsFile(Yii::$app->request->baseUrl.'/js/matriculasEstudiantes.js'
 
     <?php
 	echo $form->field($model, 'id_paralelos')->dropDownList(['prompt'=>'Seleccione...']) ?>
-
-	<?= $form->field($model, 'id_perfiles_x_personas')->dropDownList($estudiantes,['prompt'=>'Seleccione...'])?>
+	
+	<?= $form->field($model, "id_perfiles_x_personas")->widget(
+						Chosen::className(), [
+							'items' => [],
+							'disableSearch' => 0, // Search input will be disabled while there are fewer than 5 items
+							'multiple' => false,
+							'clientOptions' => [
+								'search_contains' => true,
+								'single_backstroke_delete' => false,
+							],
+                            'placeholder' => 'Seleccione un Estudiante',
+							'noResultsText' => "Enter para buscar",
+					])?>
 	
     <!--<?= $form->field($model, 'estado')->dropDownList($estados)?>-->
 

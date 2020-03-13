@@ -170,20 +170,7 @@ class EstudiantesController extends Controller
     {
         $model = new Estudiantes();		
 		
-		$connection = Yii::$app->getDb();
-		$command = $connection->createCommand("
-		SELECT es.id_perfiles_x_personas, concat(pe.nombres,' ',pe.apellidos) as nombres
-		FROM public.estudiantes as es, public.perfiles_x_personas as pp, public.personas as pe
-		where es.id_perfiles_x_personas = pp.id
-		and pp.id_personas = pe.id
-        and pp.estado = 1		
-		");
-		$result = $command->queryAll();
-		$estudiantes = array();
-		foreach ( $result as $key)
-		{
-			$estudiantes[$key['id_perfiles_x_personas']] = $key['nombres']; 
-		}
+		
 		
 		$estados = new Estados();
 		$estados = $estados->find()->where('id=1')->all();
@@ -207,7 +194,7 @@ class EstudiantesController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-			'estudiantes'=>$estudiantes,
+			// 'estudiantes'=>$estudiantes,
 			'idSedes'=>$idSedes,
 			'estados'=>$estados,
 			'idInstitucion'=>$idInstitucion,
@@ -221,6 +208,43 @@ class EstudiantesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+	 
+	//consultar los estudiantes segun cedula ( int $filtro)
+	public function actionEstudiantes(int $filtro)
+	{
+		
+		$filtro = (string) $filtro;
+		$connection = Yii::$app->getDb();
+		$command = $connection->createCommand("
+		SELECT 
+			es.id_perfiles_x_personas, 
+			concat(pe.nombres,' ',pe.apellidos) as nombres
+		FROM 
+			public.estudiantes as es, 
+			public.perfiles_x_personas as pp, 
+			public.personas as pe
+		WHERE 
+			es.id_perfiles_x_personas = pp.id
+		AND 
+			pp.id_personas = pe.id
+        AND 
+			pp.estado = 1
+		AND
+			pe.identificacion like '%". $filtro ."%'
+		");
+		$result = $command->queryAll();
+		$estudiantes = array();
+		foreach ( $result as $key)
+		{
+			$estudiantes[$key['id_perfiles_x_personas']] = $key['nombres']; 
+		}
+		
+		return json_encode($estudiantes);
+		
+	}
+	 
+	 
+	
     public function actionUpdate($id)
     {
 		

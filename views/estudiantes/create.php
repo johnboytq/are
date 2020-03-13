@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
     <?= $this->render('_form', [
         'model' => $model,
-		'estudiantes'=>$estudiantes,
+		// 'estudiantes'=>$estudiantes,
 		'idSedes'=>$idSedes,	
 		'niveles_sede'=>'',
 		'estados'=>$estados,
