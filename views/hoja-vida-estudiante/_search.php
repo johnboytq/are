@@ -48,19 +48,8 @@ $estudiantes = ArrayHelper::map( $estudiantesTable, 'id', 'nombres' );
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
 	
-	<?= $form->field($model, 'id')->widget(
-		Chosen::className(), [
-			'items' => $estudiantes,
-			'disableSearch' => 5, // Search input will be disabled while there are fewer than 5 items
-			'placeholder' => 'Seleccione...',
-			'clientOptions' => [
-				'search_contains' => true,
-				'single_backstroke_delete' => false,
-			],
-		])->label('Estudiantes');
-	?>
+	<?= $form->field($model, 'identificacion')->textInput()->label('Identificación'); ?>
 	
     <div class="form-group">
         <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
