@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProyectosPedagogicosTransversales */
 
-$this->title = 'Agregar Proyecto Pedagogico Transversale';
+$this->title = 'Agregar Proyecto Pedagogico Transversal';
 $this->params['breadcrumbs'][] = ['label' => 'Proyectos Pedagogicos Transversales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
