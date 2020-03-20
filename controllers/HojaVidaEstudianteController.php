@@ -91,13 +91,20 @@ class HojaVidaEstudianteController extends Controller
 			->andWhere( 'ppi.estado=1' )
 			->andWhere( 'pp.estado=1' );
 		if( Yii::$app->request->queryParams && array_key_exists( 'HojaVidaEstudianteBuscar', Yii::$app->request->queryParams ) && Yii::$app->request->queryParams['HojaVidaEstudianteBuscar']['identificacion'] )
+		{
 			$dataProvider->query->andWhere( "personas.identificacion='".Yii::$app->request->queryParams['HojaVidaEstudianteBuscar']['identificacion']."'" );
+			$flag = 1;
+		}
 		else
+		{
 			$dataProvider->query->andWhere( 'personas.id=-1' );
-
+			$flag=0;
+		}
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'flag' => $flag,
+			
         ]);
     }
 
