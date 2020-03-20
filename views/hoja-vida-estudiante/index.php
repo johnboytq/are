@@ -54,50 +54,60 @@ $models = $dataProvider->getModels();
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     
 	<?php
+	
+$entro = false;
 
-	foreach( $models as $key => $model ){
+			foreach( $models as $key => $model ){
+				
+				$entro = true;
 
-		$tipoDocumento 	= TiposIdentificaciones::findOne( $model->id_tipos_identificaciones);
-		$institucion 	= Instituciones::findOne( $model->institucion );
-		$genero 		= Generos::findOne( $model->id_generos );
-		$personaLegal	= Personas::findOne( $model->id );
-		$tipoDocumentoPL= $personaLegal ? TiposIdentificaciones::findOne( $personaLegal->id_tipos_identificaciones) : null;
-		$sede			= Sedes::findOne( $model->sede );
-		$jornada		= Jornadas::findOne( $model->jornada );
-		$grupo			= $model->grupo;
-		list( $grado )	= explode( "-", $model->grupo );
-		
-		$cumpleanos = new DateTime($model->fecha_nacimiento);
-		$hoy 		= new DateTime();
-		$annos 		= $hoy->diff($cumpleanos);
-		$edad 		= $annos->y;
+				$tipoDocumento 	= TiposIdentificaciones::findOne( $model->id_tipos_identificaciones);
+				$institucion 	= Instituciones::findOne( $model->institucion );
+				$genero 		= Generos::findOne( $model->id_generos );
+				$personaLegal	= Personas::findOne( $model->id );
+				$tipoDocumentoPL= $personaLegal ? TiposIdentificaciones::findOne( $personaLegal->id_tipos_identificaciones) : null;
+				$sede			= Sedes::findOne( $model->sede );
+				$jornada		= Jornadas::findOne( $model->jornada );
+				$grupo			= $model->grupo;
+				list( $grado )	= explode( "-", $model->grupo );
+				
+				$cumpleanos = new DateTime($model->fecha_nacimiento);
+				$hoy 		= new DateTime();
+				$annos 		= $hoy->diff($cumpleanos);
+				$edad 		= $annos->y;
 
-		echo "<div>";
-		echo "<span class=span>".( $tipoDocumento ? $tipoDocumento->descripcion : '' )." ".( $model->identificacion ? $model->identificacion: '' )."</span>";
-		echo "<span class=span>".$model->nombres." ".$model->apellidos."</span>";
-		echo "<span class=span><b>"."FECHA DE NACIMIENTO: </b>".$model->fecha_nacimiento."</span>";
-		echo "<span class=span>"."<b>EDAD</b>: ".$edad."</span>";
-		echo "<span class=span>".( $genero ? $genero->descripcion : '' )."</span>";
-		echo "<br>";
-		echo "<span class=span>".( $institucion ? $institucion->descripcion : 'SIN INSTITUCION ASIGNADA' ). "</span><span clss=span> <b> SEDE: </b>".( $sede ? $sede->descripcion : 'SIN SEDE ASIGNADA' )." </span>
-		<br>
-		<span class=span><b>GRADO</b>: ".$grado."</span><span clss=span> <b>GRUPO</b>: </span><span clss=span>".$grupo." <b>JORNADA:</b> </span><span clss=span>".( $jornada ? $jornada->descripcion : 'SIN JORNADA ASIGNADA' )."</span>" ;
-		echo "<br>";
+				echo "<div>";
+				echo "<span class=span>".( $tipoDocumento ? $tipoDocumento->descripcion : '' )." ".( $model->identificacion ? $model->identificacion: '' )."</span>";
+				echo "<span class=span>".$model->nombres." ".$model->apellidos."</span>";
+				echo "<span class=span><b>"."FECHA DE NACIMIENTO: </b>".$model->fecha_nacimiento."</span>";
+				echo "<span class=span>"."<b>EDAD</b>: ".$edad."</span>";
+				echo "<span class=span>".( $genero ? $genero->descripcion : '' )."</span>";
+				echo "<br>";
+				echo "<span class=span>".( $institucion ? $institucion->descripcion : 'SIN INSTITUCION ASIGNADA' ). "</span><span clss=span> <b> SEDE: </b>".( $sede ? $sede->descripcion : 'SIN SEDE ASIGNADA' )." </span>
+				<br>
+				<span class=span><b>GRADO</b>: ".$grado."</span><span clss=span> <b>GRUPO</b>: </span><span clss=span>".$grupo." <b>JORNADA:</b> </span><span clss=span>".( $jornada ? $jornada->descripcion : 'SIN JORNADA ASIGNADA' )."</span>" ;
+				echo "<br>";
 
-		if( $personaLegal && $personaLegal->estado == 1 ){
-			echo "<span class=span>".( $tipoDocumentoPL ? $tipoDocumentoPL->descripcion : '' )." ".( $personaLegal ? $personaLegal->identificacion : '' )."</span>";
-			echo "<span class=span>".( $personaLegal ? $personaLegal->nombres : '' )." ".( $personaLegal ? $personaLegal->apellidos : '' )."</span>";
-			echo "<span>PARENTESCO: MAMÁ</span>";
-			echo "<span class=span>"."CORREO: ".( $personaLegal ? $personaLegal->correo : '' )."</span>";
-			echo "<span class=span>"."TELEFONO: ".( $personaLegal ? $personaLegal->telefonos : '' )."</span>";
+				if( $personaLegal && $personaLegal->estado == 1 ){
+					echo "<span class=span>".( $tipoDocumentoPL ? $tipoDocumentoPL->descripcion : '' )." ".( $personaLegal ? $personaLegal->identificacion : '' )."</span>";
+					echo "<span class=span>".( $personaLegal ? $personaLegal->nombres : '' )." ".( $personaLegal ? $personaLegal->apellidos : '' )."</span>";
+					echo "<span>PARENTESCO: MAMÁ</span>";
+					echo "<span class=span>"."CORREO: ".( $personaLegal ? $personaLegal->correo : '' )."</span>";
+					echo "<span class=span>"."TELEFONO: ".( $personaLegal ? $personaLegal->telefonos : '' )."</span>";
+				}
+				else{
+					echo "<span class=span>SIN REPRESENTANTE LEGAL</span>";
+				}
+				
+				echo "</div>";
+
+				break;
+			}
+	
+	
+		if( !$entro and $flag ==1){
+			echo "El estudiante no esta matriculado";
 		}
-		else{
-			echo "<span class=span>SIN REPRESENTANTE LEGAL</span>";
-		}
-		
-		echo "</div>";
-
-		break;
-	}
+	
 	?>
 </div>
