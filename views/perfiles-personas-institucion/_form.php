@@ -62,7 +62,7 @@ use yii\widgets\ActiveForm;
 	<?= $form->field($model, "id_perfiles_x_persona")->widget(
 						Chosen::className(), [
 							'items' => [],
-							'disableSearch' => 5, // Search input will be disabled while there are fewer than 5 items
+							'disableSearch' => 0, // Search input will be disabled while there are fewer than 5 items
 							'multiple' => false,
 							'clientOptions' => [
 								'search_contains' => true,

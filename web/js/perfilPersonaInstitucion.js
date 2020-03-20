@@ -15,7 +15,41 @@ $( document ).ready(function() {
 	//listar(); 
 	llenarListasActualizar();
 
-	
+
+
+
+	$( 'div' ).on( 'keydown', '#perfilespersonasinstitucion_id_perfiles_x_persona_chosen input', function(event) {
+		if(event.which == 13)
+		{
+			var info ='';
+			filtro = $(this).val();
+			if (filtro.length > 3)
+			{
+				
+				idPerfiles = $("#selPerfiles").val();
+			
+				$.get( "index.php?r=perfiles-personas-institucion/listar-p&idPerfiles="+idPerfiles+"&filtro="+filtro, 
+					function( data )
+					{
+						$('#perfilespersonasinstitucion-id_perfiles_x_persona').find('option:not(:first)').remove();
+						for( i = 0; i< data.length; i++ )
+						{ 	
+							$("#perfilespersonasinstitucion-id_perfiles_x_persona")
+							.append('<option value='+data[i].id+'>'+data[i].nombres+'</option>');
+							
+						}
+						 
+						if (perfilesPersonasSelected != "")
+						{  
+							$( "#perfilespersonasinstitucion-id_perfiles_x_persona" ).val(perfilesPersonasSelected);
+						}
+						$("#perfilespersonasinstitucion-id_perfiles_x_persona").trigger("chosen:updated");
+					},'json'
+				);
+			
+			}
+		}
+	});
 	
 });
 
@@ -43,31 +77,37 @@ function llenarListasActualizar()
  * author : Viviana Rodas
  * exception : No tiene excepciones.
  */
-$("#selPerfiles").change(function(){  
+// $("#selPerfiles").change(function(){  
    
-	idPerfiles = $("#selPerfiles").val();
+	// idPerfiles = $("#selPerfiles").val();
 	
 	
-	//llenar perfiles por persona
-	$.get( "index.php?r=perfiles-personas-institucion/listar-p&idPerfiles="+idPerfiles, 
-				function( data )
-				{
-					$('#perfilespersonasinstitucion-id_perfiles_x_persona').find('option:not(:first)').remove();
-					for( i = 0; i< data.length; i++ )
-					{ 	
-						$("#perfilespersonasinstitucion-id_perfiles_x_persona")
-						.append('<option value='+data[i].id+'>'+data[i].nombres+'</option>');
+	// //llenar perfiles por persona
+	// $.get( "index.php?r=perfiles-personas-institucion/listar-p&idPerfiles="+idPerfiles+"&filtro=",
+				// function( data )
+				// {
+					// $('#perfilespersonasinstitucion-id_perfiles_x_persona').find('option:not(:first)').remove();
+					
+					// $("#perfilespersonasinstitucion-id_perfiles_x_persona").append('<option value="dddd">aaaa</option>');
+					
+					// for( i = 0; i< data.length; i++ )
+					// { 	
+						// $("#perfilespersonasinstitucion-id_perfiles_x_persona")
+						// .append('<option value='+data[i].id+'>'+data[i].nombres+'</option>');
 						
-					}
+					// }
 					 
-					if (perfilesPersonasSelected != "")
-					{  
-						$( "#perfilespersonasinstitucion-id_perfiles_x_persona" ).val(perfilesPersonasSelected);
-					}
-					$("#perfilespersonasinstitucion-id_perfiles_x_persona").trigger("chosen:updated");
-				},
-		"json");
+					// if (perfilesPersonasSelected != "")
+					// {  
+						// $( "#perfilespersonasinstitucion-id_perfiles_x_persona" ).val(perfilesPersonasSelected);
+					// }
+					// $("#perfilespersonasinstitucion-id_perfiles_x_persona").trigger("chosen:updated");
+				// },
+		// "json");
 		
 	
-}); 
+// }); 
+
+
+
 

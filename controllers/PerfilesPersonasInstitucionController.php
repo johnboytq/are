@@ -263,7 +263,7 @@ class PerfilesPersonasInstitucionController extends Controller
      * @return la lista de asignaturas
      * @throws no tiene excepciones
      */		
-  public function actionListarP($idPerfiles )
+  public function actionListarP($idPerfiles,$filtro )
 	{
 		
 		
@@ -277,7 +277,8 @@ class PerfilesPersonasInstitucionController extends Controller
 												AND pe.id = pp.id_perfiles
 												AND pp.estado = 1
 												AND p.estado = 1
-												AND pe.estado = 1");
+												AND pe.estado = 1
+												AND ( concat(p.nombres,' ',p.apellidos) iLIKE '%".$filtro."%' OR p.identificacion LIKE '%".$filtro."%')");
 		$result = $command->queryAll();
 		
 		 return Json::encode( $result );
