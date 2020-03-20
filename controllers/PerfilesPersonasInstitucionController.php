@@ -1,5 +1,5 @@
 <?php
-/**********
+/********** 
 Versión: 001
 Fecha: 25-04-2018
 Desarrollador: Maria Viviana Rodas
