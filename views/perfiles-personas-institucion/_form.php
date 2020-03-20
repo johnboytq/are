@@ -68,7 +68,7 @@ use yii\widgets\ActiveForm;
 								'search_contains' => true,
 								'single_backstroke_delete' => false,
 							],
-                            'placeholder' => 'Seleccione Institución',
+                            'placeholder' => 'Seleccione una persona',
 					])?>
 	
 	<?= $form->field($model, 'observaciones')->textarea(['rows' => '6']) ?>
