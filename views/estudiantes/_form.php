@@ -53,10 +53,9 @@ $this->registerJs( "
 						$.get( 'index.php?r=estudiantes/estudiantes&filtro='+filtro,
 						function( data )
 						{
-							$.each(data, function( index, datos) 
-								{	console.log(datos.identificacion);
-									info = info + '<option value='+datos.id+'>'+datos.nombres+'</option>';
-									
+							$.each(data, function( index, datos)
+								{	
+									info = info + '<option value='+index+'>'+datos+'</option>';
 								});
 								
 							select = $('#estudiantes-id_perfiles_x_personas');	
