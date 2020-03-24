@@ -48,7 +48,7 @@ class IndicadorDesempeno extends \yii\db\ActiveRecord
     {
         return [
             [['descripcion'], 'string', 'max' => 100],
-            [['codigo'], 'integer'],
+            [['codigo'], 'number'],
 			[['codigo','descripcion'], 'required'],
         ];
     }
