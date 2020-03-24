@@ -96,8 +96,10 @@ $this->params['breadcrumbs'][] = $this->title;
 															group by a.descripcion, p.descripcion
 															");
 					$result = $command->queryAll();
-								
-					return $result[0]['distribucion'];
+					if( $result )			
+						return $result[0]['distribucion'];
+					else
+						return '';
 				},
 				
 			],
