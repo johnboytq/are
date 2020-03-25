@@ -910,7 +910,7 @@ class CalificacionesController extends Controller
 				if( empty( $array_key_periodo[$obj_calificacion["id_periodo"]] ) )
 					$array_key_periodo[$obj_calificacion["id_periodo"]] = 0;
 
-				$observaciones_calificaciones[$obj_calificacion["materia"]][$obj_calificacion["id_periodo"]][$array_key_periodo[$obj_calificacion["id_periodo"]]] = $obj_calificacion["calificacion"];
+				$observaciones_calificaciones[$obj_calificacion["materia"]][$obj_calificacion["id_periodo"]][] = $obj_calificacion["calificacion"];
                 $array_key_periodo[$obj_calificacion["id_periodo"]]++;
 					
                 // if ($obj_calificacion["id_periodo"] == 8){
